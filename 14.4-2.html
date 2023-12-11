@@ -1,0 +1,38 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <script src="js/tools.js"></script>
+    <script src="js/ball.js"></script>
+    <script>
+        function $$(id) {
+            return document.getElementById(id);
+        }
+        window.onload = function () {
+            var cnv = $$("canvas");
+            var cxt = cnv.getContext("2d");
+
+            //实例化一个小球，球心坐标、半径以及颜色都采用默认值
+            var ball = new Ball();
+            var speed = 2;
+            //速度方向与X轴正方向角度为30°
+            var vx = speed * Math.cos(30 * Math.PI / 180);
+            var vy = speed * Math.sin(30 * Math.PI / 180);
+
+            (function drawFrame() {
+                window.requestAnimationFrame(drawFrame);
+                cxt.clearRect(0, 0, cnv.width, cnv.height);
+
+                ball.x += vx;
+                ball.y += vy;
+
+                ball.fill(cxt);
+            })();
+        }
+    </script>
+</head>
+<body>
+    <canvas id="canvas" width="200" height="150" style="border:1px solid silver;"></canvas>
+</body>
+</html>

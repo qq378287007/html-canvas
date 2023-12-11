@@ -1,0 +1,29 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <style type="text/css">
+        /*隐藏HTML中的img元素*/
+        #pic {
+            display: none;
+        }
+    </style>
+    <script>
+        function $$(id) {
+            return document.getElementById(id);
+        }
+        window.onload = function () {
+            var cnv = $$("canvas");
+            var cxt = cnv.getContext("2d");
+
+            var image = document.getElementById("pic");
+            cxt.drawImage(image, 40, 20);
+        }
+    </script>
+</head>
+<body>
+    <canvas id="canvas" width="200" height="150" style="border:1px dashed gray;"></canvas>
+    <img id="pic" src="images/princess.png" alt="" />
+</body>
+</html>
