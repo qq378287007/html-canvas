@@ -1,5 +1,6 @@
 ﻿//定义工具函数集
 window.tools = {};
+
 //获取鼠标当前位置
 window.tools.getMouse = function (element) {
     var mouse = { x: 0, y: 0 };
@@ -22,20 +23,22 @@ window.tools.getMouse = function (element) {
     }, false);
     return mouse;
 }
+
 //获取随机颜色值
-window.tools.getRandomColor=function(){
+window.tools.getRandomColor = function () {
     return '#' +
-    (function (color) {
-        return (color += '0123456789abcdef'[Math.floor(Math.random() * 16)])
-        && (color.length == 6) ? color : arguments.callee(color);
-    })('');
+        (function (color) {
+            return (color += '0123456789abcdef'[Math.floor(Math.random() * 16)])
+                && (color.length == 6) ? color : arguments.callee(color);
+        })('');
 }
+
 //外接矩形判定法（碰撞检测）
 window.tools.checkRect = function (rectA, rectB) {
     return !(rectA.x + rectA.width < rectB.x ||
-             rectB.x + rectB.width < rectA.x ||
-             rectA.y + rectA.height < rectB.y ||
-             rectB.y + rectB.height < rectA.y);
+        rectB.x + rectB.width < rectA.x ||
+        rectA.y + rectA.height < rectB.y ||
+        rectB.y + rectB.height < rectA.y);
 }
 
 //外接圆判定法（碰撞检测）

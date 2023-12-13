@@ -17,20 +17,20 @@ Box.prototype = {
     //绘制“描边”矩形
     stroke: function (cxt) {
         cxt.save();
-        cxt.strokeStyle = this.color;
         cxt.beginPath();
         cxt.rect(this.x, this.y, this.width, this.height);
         cxt.closePath();
+        cxt.strokeStyle = this.color;
         cxt.stroke();
         cxt.restore();
     },
     //绘制“填充”矩形
     fill: function (cxt) {
         cxt.save();
-        cxt.fillStyle = this.color;
         cxt.beginPath();
         cxt.rect(this.x, this.y, this.width, this.height);
         cxt.closePath();
+        cxt.fillStyle = this.color;
         cxt.fill();
         cxt.restore();
     }

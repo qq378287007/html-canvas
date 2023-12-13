@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="utf-8" />
     <title></title>
@@ -22,6 +23,8 @@
                 cxt.clearRect(0, 0, cnv.width, cnv.height);
 
                 ball.x += 1;
+                if(ball.x > cnv.width)
+                    ball.x = 0;
                 ball.y = cnv.height / 2 + Math.sin(angle) * range;
                 ball.fill(cxt);
 
@@ -31,7 +34,9 @@
         }
     </script>
 </head>
+
 <body>
     <canvas id="canvas" width="200" height="150" style="border:1px solid silver;"></canvas>
 </body>
+
 </html>

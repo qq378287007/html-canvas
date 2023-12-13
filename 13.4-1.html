@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="utf-8" />
     <title></title>
@@ -29,12 +30,16 @@
 
                 //变量递增
                 x += 2;
+                if(x > cnv.width)
+                    x = 0;
             })();
         }
         wind
     </script>
 </head>
+
 <body>
     <canvas id="canvas" width="200" height="150" style="border:1px solid silver;"></canvas>
 </body>
+
 </html>

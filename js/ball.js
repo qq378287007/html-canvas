@@ -1,5 +1,4 @@
-﻿function Ball(x,y,radius,color)
-{
+﻿function Ball(x, y, radius, color) {
     //小球中心的x坐标，默认值为0
     this.x = x || 0;
     //小球中心的y坐标，默认值为0
@@ -20,10 +19,10 @@ Ball.prototype = {
     stroke: function (cxt) {
         cxt.save();
         cxt.scale(this.scaleX, this.scaleY);
-        cxt.strokeStyle = this.color;
         cxt.beginPath();
         cxt.arc(this.x, this.y, this.radius, 0, 360 * Math.PI / 180, false);
         cxt.closePath();
+        cxt.strokeStyle = this.color;
         cxt.stroke();
         cxt.restore();
     },
@@ -32,26 +31,24 @@ Ball.prototype = {
         cxt.save();
         cxt.translate(this.x, this.y);
         cxt.scale(this.scaleX, this.scaleY);
-        cxt.fillStyle = this.color;
         cxt.beginPath();
         cxt.arc(0, 0, this.radius, 0, 360 * Math.PI / 180, false);
         cxt.closePath();
+        cxt.fillStyle = this.color;
         cxt.fill();
         cxt.restore();
     },
     //获取包含小球的最小矩形
-    getRect:function()
-    {
-        var rect={
-                x: this.x - this.radius,
-                y: this.y - this.radius,
-                width: this.radius * 2,
-                height: this.radius * 2
+    getRect: function () {
+        var rect = {
+            x: this.x - this.radius,
+            y: this.y - this.radius,
+            width: this.radius * 2,
+            height: this.radius * 2
         }
         return rect;
     },
-    checkMouse:function(mouse)
-    {
+    checkMouse: function (mouse) {
         var dx = mouse.x - this.x;
         var dy = mouse.y - this.y;
         var distance = Math.sqrt(dx * dx + dy * dy);

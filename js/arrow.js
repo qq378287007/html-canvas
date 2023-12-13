@@ -13,7 +13,6 @@ Arrow.prototype = {
         cxt.save();
         cxt.translate(this.x, this.y);
         cxt.rotate(this.angle);
-        cxt.strokeStyle = this.color;
         cxt.beginPath();
         cxt.moveTo(-20, -10);
         cxt.lineTo(0, -10);
@@ -23,6 +22,7 @@ Arrow.prototype = {
         cxt.lineTo(0, 10);
         cxt.lineTo(-20, 10);
         cxt.closePath();
+        cxt.strokeStyle = this.color;
         cxt.stroke();
         cxt.restore();
     },
@@ -30,7 +30,6 @@ Arrow.prototype = {
         cxt.save();
         cxt.translate(this.x, this.y);
         cxt.rotate(this.angle);
-        cxt.fillStyle = this.color;
         cxt.beginPath();
         cxt.moveTo(-20, -10);
         cxt.lineTo(0, -10);
@@ -40,6 +39,7 @@ Arrow.prototype = {
         cxt.lineTo(0, 10);
         cxt.lineTo(-20, 10);
         cxt.closePath();
+        cxt.fillStyle = this.color;
         cxt.fill();
         cxt.restore();
     }
