@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="utf-8" />
     <title></title>
@@ -13,33 +14,28 @@
             var cnv = $$("canvas");
             var cxt = cnv.getContext("2d");
 
-            //定义一个用来存放小球的数组balls
-            var balls = [];
-            //n表示小球数量
-            var n = 50;
+            var balls = [];//定义一个用来存放小球的数组balls
+            var n = 50;//n表示小球数量
 
-            //生成n个小球，其中小球的color、vx、vy都是随机值
-            for (var i = 0; i < n; i++) {
+            for (var i = 0; i < n; i++) { //生成n个小球，其中小球的color、vx、vy都是随机值
                 //球心坐标为Canvas中心，color为随机颜色值
                 var ball = new Ball(cnv.width / 2, cnv.height / 2, 5, tools.getRandomColor());
                 //ball.vx和ball.vy取值都是：-1~1之间的任意数
                 ball.vx = Math.random() * 2 - 1;
                 ball.vy = Math.random() * 2 - 1;
-                //添加到数组balls中
-                balls.push(ball);
+                balls.push(ball); //添加到数组balls中
             }
 
             (function frame() {
                 window.requestAnimationFrame(frame);
                 cxt.clearRect(0, 0, cnv.width, cnv.height);
 
-                //使用forEach()函数遍历数组balls
-                balls.forEach(function (ball) {
+                balls.forEach(function (ball) {//使用forEach()函数遍历数组balls
                     //边界检测，使得小球完全移出画布后会在中心位置重新生成
                     if (ball.x < -ball.radius ||
-                      ball.x > cnv.width + ball.radius ||
-                      ball.y < -ball.radius ||
-                      ball.y > cnv.height + ball.radius) {
+                        ball.x > cnv.width + ball.radius ||
+                        ball.y < -ball.radius ||
+                        ball.y > cnv.height + ball.radius) {
                         ball.x = cnv.width / 2;
                         ball.y = cnv.height / 2;
                         ball.vx = Math.random() * 2 - 1;
@@ -54,7 +50,9 @@
         }
     </script>
 </head>
+
 <body>
     <canvas id="canvas" width="200" height="150" style="border:1px solid silver;"></canvas>
 </body>
+
 </html>

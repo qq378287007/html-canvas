@@ -8,6 +8,7 @@
     //旋转角度，默认值为0
     this.angle = angle || 0;
 }
+
 Arrow.prototype = {
     stroke: function (cxt) {
         cxt.save();

@@ -14,9 +14,9 @@
     this.vx = 0;
     this.vy = 0;
 }
+
 Ball.prototype = {
-    //绘制“描边”小球
-    stroke: function (cxt) {
+    stroke: function (cxt) {//绘制“描边”小球
         cxt.save();
         cxt.scale(this.scaleX, this.scaleY);
         cxt.beginPath();
@@ -26,8 +26,7 @@ Ball.prototype = {
         cxt.stroke();
         cxt.restore();
     },
-    //绘制“填充”小球
-    fill: function (cxt) {
+    fill: function (cxt) {//绘制“填充”小球
         cxt.save();
         cxt.translate(this.x, this.y);
         cxt.scale(this.scaleX, this.scaleY);
@@ -38,8 +37,7 @@ Ball.prototype = {
         cxt.fill();
         cxt.restore();
     },
-    //获取包含小球的最小矩形
-    getRect: function () {
+    getRect: function () {//获取包含小球的最小矩形
         var rect = {
             x: this.x - this.radius,
             y: this.y - this.radius,
@@ -52,10 +50,6 @@ Ball.prototype = {
         var dx = mouse.x - this.x;
         var dy = mouse.y - this.y;
         var distance = Math.sqrt(dx * dx + dy * dy);
-        if (distance < this.radius) {
-            return true;
-        } else {
-            return false;
-        }
+        return distance < this.radius;
     }
 }

@@ -7,15 +7,14 @@
     this.width = width || 80;
     //小球高度，默认值为40
     this.height = height || 40;
-
     this.color = color || "red";
     //x和y速度
     this.vx = 0;
     this.vy = 0;
 }
+
 Box.prototype = {
-    //绘制“描边”矩形
-    stroke: function (cxt) {
+    stroke: function (cxt) {//绘制“描边”矩形
         cxt.save();
         cxt.beginPath();
         cxt.rect(this.x, this.y, this.width, this.height);
@@ -24,8 +23,7 @@ Box.prototype = {
         cxt.stroke();
         cxt.restore();
     },
-    //绘制“填充”矩形
-    fill: function (cxt) {
+    fill: function (cxt) {//绘制“填充”矩形
         cxt.save();
         cxt.beginPath();
         cxt.rect(this.x, this.y, this.width, this.height);

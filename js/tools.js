@@ -15,14 +15,11 @@ window.tools.getMouse = function (element) {
             x = e.clientX + document.body.scrollLeft + document.documentElement.scrollLeft;
             y = e.clientY + document.body.scrollTop + document.documentElement.scrollTop;
         }
-        x -= element.offsetLeft;
-        y -= element.offsetTop;
-
-        mouse.x = x;
-        mouse.y = y;
+        mouse.x = x - element.offsetLeft;
+        mouse.y = y - element.offsetTop;
     }, false);
     return mouse;
-}
+};
 
 //获取随机颜色值
 window.tools.getRandomColor = function () {
@@ -31,7 +28,7 @@ window.tools.getRandomColor = function () {
             return (color += '0123456789abcdef'[Math.floor(Math.random() * 16)])
                 && (color.length == 6) ? color : arguments.callee(color);
         })('');
-}
+};
 
 //外接矩形判定法（碰撞检测）
 window.tools.checkRect = function (rectA, rectB) {
@@ -39,20 +36,15 @@ window.tools.checkRect = function (rectA, rectB) {
         rectB.x + rectB.width < rectA.x ||
         rectA.y + rectA.height < rectB.y ||
         rectB.y + rectB.height < rectA.y);
-}
+};
 
 //外接圆判定法（碰撞检测）
 window.tools.checkCircle = function (circleB, circleA) {
     var dx = circleB.x - circleA.x;
     var dy = circleB.y - circleA.y;
     var distance = Math.sqrt(dx * dx + dy * dy);
-    if (distance < (circleA.radius + circleB.radius)) {
-        return true;
-    }
-    else {
-        return false;
-    }
-}
+    return distance < circleA.radius + circleB.radius;
+};
 
 //获取键盘控制方向
 window.tools.getKey = function () {
@@ -71,7 +63,7 @@ window.tools.getKey = function () {
         }
     }, false);
     return key;
-}
+};
 
 //动画循环，兼容各大浏览器
 window.requestAnimationFrame = (

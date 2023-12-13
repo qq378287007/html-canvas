@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="utf-8" />
     <title></title>
@@ -15,55 +16,42 @@
 
             var ball = new Ball(cnv.width / 2, cnv.height / 2);
             ball.fill(cxt);
+
             var key = tools.getKey();
-
-            //添加键盘事件
-            window.addEventListener("keydown", function (e) {
+            window.addEventListener("keydown", function (e) {//添加键盘事件
                 cxt.clearRect(0, 0, cnv.width, cnv.height);
-
-                //根据key.direction的值，判断小球移动方向
-                switch (key.direction) {
+                switch (key.direction) { //根据key.direction的值，判断小球移动方向
                     case "up":
                         ball.y -= 3;
-                        //检测上边界
-                        if (ball.y < -ball.radius) {
+                        if (ball.y < -ball.radius)  //检测上边界
                             ball.y = cnv.height + ball.radius;
-                        }
-                        ball.fill(cxt);
                         break;
                     case "down":
                         ball.y += 3;
-                        //检测下边界
-                        if (ball.y > cnv.height + ball.radius) {
+                        if (ball.y > cnv.height + ball.radius) //检测下边界
                             ball.y = -ball.radius;
-                        }
-                        ball.fill(cxt);
                         break;
                     case "left":
                         ball.x -= 3;
-                        //检测左边界
-                        if (ball.x < -ball.radius) {
+                        if (ball.x < -ball.radius) //检测左边界
                             ball.x = cnv.width + ball.radius;
-                        }
-                        ball.fill(cxt);
                         break;
                     case "right":
                         ball.x += 3;
-                        //检测右边界
-                        if (ball.x > cnv.width + ball.radius) {
+                        if (ball.x > cnv.width + ball.radius)  //检测右边界
                             ball.x = -ball.radius;
-                        }
-                        ball.fill(cxt);
                         break;
-                        //default值
                     default:
-                        ball.fill(cxt);
-                }
+                        break;
+                };
+                ball.fill(cxt);
             }, false);
         }
     </script>
 </head>
+
 <body>
     <canvas id="canvas" width="200" height="150" style="border:1px solid silver;"></canvas>
 </body>
+
 </html>
