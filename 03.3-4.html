@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <script>
+        function $$(id) {
+            return document.getElementById(id);
+        }
+        window.onload = function () {
+            var cnv = $$("canvas");
+            var cxt = cnv.getContext("2d");
+
+            var start_x = 20;
+            var start_y = 20;
+            var width = 150;
+            var height = 110;
+            var radius = 20;
+
+            var up_y = start_y;
+            var down_y = start_y + height;
+            var left_x = start_x;
+            var right_x = start_x + width;
+
+            cxt.moveTo(left_x + radius, up_y);
+            cxt.lineTo(right_x - radius, up_y);
+            cxt.arcTo(right_x, up_y, right_x, up_y + radius, radius);
+
+            //cxt.moveTo(right_x, up_y + radius);
+            cxt.lineTo(right_x, down_y - radius);
+            cxt.arcTo(right_x, down_y, right_x - radius, down_y, radius);
+
+            //cxt.moveTo(right_x - radius, down_y);
+            cxt.lineTo(left_x + radius, down_y);
+            cxt.arcTo(left_x, down_y, left_x, down_y - radius, radius);
+
+            //cxt.moveTo(left_x, down_y - radius);
+            cxt.lineTo(left_x, left_x + radius);
+            cxt.arcTo(left_x, up_y, left_x + radius, up_y, radius);
+            cxt.stroke();
+        }
+    </script>
+</head>
+
+<body>
+    <canvas id="canvas" width="200" height="150" style="border:1px dashed gray;"></canvas>
+</body>
+
+</html>
