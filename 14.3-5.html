@@ -14,22 +14,23 @@
             var cnv = $$("canvas");
             var cxt = cnv.getContext("2d");
 
-            var ball = new Ball(0, cnv.height / 2);
+            const ball = new Ball(cnv.width / 2, cnv.height / 2);
+            const range = 40;
+            var vx = 1;
             var angle = 0;
-            var range = 40;
 
             (function frame() {
-                window.requestAnimationFrame(frame);
                 cxt.clearRect(0, 0, cnv.width, cnv.height);
 
-                ball.x += 1;
-                if(ball.x > cnv.width)
-                    ball.x = 0;
+                if (ball.x < ball.radius || ball.x > cnv.width - ball.radius)
+                    vx = -vx;
+                ball.x += vx;
                 ball.y = cnv.height / 2 + Math.sin(angle) * range;
                 ball.fill(cxt);
 
                 //角度递增
                 angle += 0.05;
+                window.requestAnimationFrame(frame);
             })();
         }
     </script>

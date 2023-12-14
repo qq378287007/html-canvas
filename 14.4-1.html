@@ -14,20 +14,16 @@
             var cnv = $$("canvas");
             var cxt = cnv.getContext("2d");
 
-            //实例化一个小球
-            var ball = new Ball(0, cnv.height / 2);
-            //定义X轴速度为2，也就是每帧向正方向移动2px
+            const ball = new Ball(cnv.width / 2, cnv.height / 2); 
             var vx = 2;
-
+            
             (function frame() {
-                window.requestAnimationFrame(frame);
                 cxt.clearRect(0, 0, cnv.width, cnv.height);
-
-                if (ball.x < 0 || ball.x > cnv.width)
+                if (ball.x < ball.radius || ball.x > cnv.width - ball.radius)
                     vx = -vx;
                 ball.x += vx;
-
                 ball.fill(cxt);
+                window.requestAnimationFrame(frame);
             })();
         }
     </script>

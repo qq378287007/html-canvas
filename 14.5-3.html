@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="utf-8" />
     <title></title>
@@ -13,29 +14,33 @@
             var cnv = $$("canvas");
             var cxt = cnv.getContext("2d");
 
-            var ball = new Ball();
-            var a = 0.2;
-            //计算出X轴和Y轴2个方向的加速度
-            var ax = a * Math.cos(30 * Math.PI / 180);
-            var ay = a * Math.sin(30 * Math.PI / 180);
+            const ball = new Ball(cnv.width / 2, cnv.height / 2);
+            const a = 0.2;
+            const ax = a * Math.cos(30 * Math.PI / 180);
+            const ay = a * Math.sin(30 * Math.PI / 180);
             var vx = 0;
             var vy = 0;
 
             (function drawFrame() {
-                window.requestAnimationFrame(drawFrame);
                 cxt.clearRect(0, 0, cnv.width, cnv.height);
-
+                if (ball.x < ball.radius || ball.x > cnv.width - ball.radius)
+                    vx = -vx;
                 ball.x += vx;
+                if (ball.y < ball.radius || ball.y > cnv.height - ball.radius)
+                    vy = -vy;
                 ball.y += vy;
                 ball.fill(cxt);
 
                 vx += ax;
                 vy += ay;
+                window.requestAnimationFrame(drawFrame);
             })();
         }
     </script>
 </head>
+
 <body>
     <canvas id="canvas" width="200" height="150" style="border:1px solid silver;"></canvas>
 </body>
+
 </html>

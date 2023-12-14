@@ -14,26 +14,22 @@
             var cnv = $$("canvas");
             var cxt = cnv.getContext("2d");
 
-            //实例化一个小球，球心坐标、半径以及颜色都采用默认值
-            var ball = new Ball();
-            var speed = 2;
-            //速度方向与X轴正方向角度为30°
+            const ball = new Ball(cnv.width / 2, cnv.height / 2);
+            const speed = 2;
+
             var vx = speed * Math.cos(30 * Math.PI / 180);
             var vy = speed * Math.sin(30 * Math.PI / 180);
 
             (function drawFrame() {
-                window.requestAnimationFrame(drawFrame);
                 cxt.clearRect(0, 0, cnv.width, cnv.height);
-
-                if (ball.x < 0 || ball.x > cnv.width)
+                if (ball.x < ball.radius || ball.x > cnv.width - ball.radius)
                     vx = -vx;
-                if (ball.y < 0 || ball.y > cnv.height)
-                    vy = -vy;
-
                 ball.x += vx;
+                if (ball.y < ball.radius || ball.y > cnv.height - ball.radius)
+                    vy = -vy;
                 ball.y += vy;
-
                 ball.fill(cxt);
+                window.requestAnimationFrame(drawFrame);
             })();
         }
     </script>

@@ -14,12 +14,11 @@
             var cnv = $$("canvas");
             var cxt = cnv.getContext("2d");
 
-            var ball = new Ball(cnv.width / 2, cnv.height / 2);
+            const ball = new Ball(cnv.width / 2, cnv.height / 2);
+            const range = 80;
             var angle = 0;
-            var range = 80;
 
             (function frame() {
-                window.requestAnimationFrame(frame);
                 cxt.clearRect(0, 0, cnv.width, cnv.height);
 
                 ball.x = cnv.width / 2 + Math.sin(angle) * range;
@@ -27,6 +26,7 @@
 
                 //角度递增
                 angle += 0.05;
+                window.requestAnimationFrame(frame);
             })();
         }
     </script>

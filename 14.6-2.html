@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="utf-8" />
     <title></title>
@@ -13,12 +14,10 @@
             var cnv = $$("canvas");
             var cxt = cnv.getContext("2d");
 
-            //初始化数据
-            var ball = new Ball(cnv.width / 2, 0);
-            //Y轴初始速度为0，重力加速度为0.2，反弹系数为-0.8
-            var vy = 0;
-            var gravity = 0.2;
-            var bounce = -0.8;
+            const ball = new Ball(cnv.width / 2, 0);
+            const gravity = 0.2;//重力加速度
+            const bounce = -0.8;//反弹系数
+            var vy = 0; //y轴初始速度
 
             (function drawFrame() {
                 window.requestAnimationFrame(drawFrame);
@@ -28,8 +27,7 @@
                 //边界检测
                 if (ball.y > cnv.height - ball.radius) {
                     ball.y = cnv.height - ball.radius;
-                    //速度反向并且减小
-                    vy = vy * bounce;
+                    vy = vy * bounce;//速度反向并且减小
                 }
                 ball.fill(cxt);
 
@@ -38,7 +36,9 @@
         }
     </script>
 </head>
+
 <body>
     <canvas id="canvas" width="200" height="150" style="border:1px solid silver;"></canvas>
 </body>
+
 </html>

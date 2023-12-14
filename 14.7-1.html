@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="utf-8" />
     <title></title>
@@ -13,26 +14,23 @@
             var cnv = $$("canvas");
             var cxt = cnv.getContext("2d");
 
-            //初始化数据
-            var ball = new Ball(0, cnv.height / 2);
-            //初始化X轴方向速度为2，摩擦系数为0.95
-            var vx = 8;
-            var friction = 0.95;
+            const ball = new Ball(0, cnv.height / 2);
+            const friction = 0.95;//摩擦系数
+            var vx = 8;//v轴方向速度
 
             (function frame() {
-                window.requestAnimationFrame(frame);
                 cxt.clearRect(0, 0, cnv.width, cnv.height);
-
                 ball.x += vx;
                 ball.fill(cxt);
-
-                //变量改变
                 vx *= friction;
+                window.requestAnimationFrame(frame);
             })();
         }
     </script>
 </head>
+
 <body>
     <canvas id="canvas" width="200" height="150" style="border:1px solid silver;"></canvas>
 </body>
+
 </html>
