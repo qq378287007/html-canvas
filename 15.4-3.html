@@ -14,18 +14,17 @@
             var cnv = $$("canvas");
             var cxt = cnv.getContext("2d");
 
-            var balls = []; //balls表示用来存放小球的数组
-            var n = 50; //n表示小球数量
-            
-            for (var i = 0; i < n; i++) {//生成n个小球，其中小球的color、vx、vy取的都是随机值
-                var ball = new Ball(cnv.width / 2, cnv.height / 2, 5, tools.getRandomColor());
+            const balls = []; //balls表示用来存放小球的数组
+            const n = 50; //n表示小球数量
+
+            for (let i = 0; i < n; i++) {//生成n个小球，其中小球的color、vx、vy取的都是随机值
+                const ball = new Ball(cnv.width / 2, cnv.height / 2, 5, tools.getRandomColor());
                 ball.vx = 3;
                 ball.vy = (Math.random() * 2 - 1) * 3;
                 balls.push(ball);
             }
 
             (function frame() {
-                window.requestAnimationFrame(frame);
                 cxt.clearRect(0, 0, cnv.width, cnv.height);
                 balls.forEach(function (ball) { //使用forEach()函数遍历数组balls
                     //当小球移出画布时，会在中心位置重新生成
@@ -44,7 +43,8 @@
 
                     ball.x += ball.vx;
                     ball.y += ball.vy;
-                })
+                });
+                window.requestAnimationFrame(frame);
             })();
         }
     </script>

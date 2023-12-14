@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="utf-8" />
     <title></title>
@@ -13,34 +14,42 @@
             var cnv = $$("canvas");
             var cxt = cnv.getContext("2d");
 
-            //初始化数据
-            var bigBall = new Ball(cnv.width / 2, cnv.height / 2, 15, "# FF6699");
-            var smallBall = new Ball(cnv.width / 2, cnv.height / 2, 12, "#66CCFF");
-            var mouse = tools.getMouse(cnv);
-            var easing = 0.05;
+            const bigBall = new Ball(cnv.width / 2, cnv.height / 2, 15, "# FF6699");
+            const smallBall = new Ball(cnv.width / 2, cnv.height / 2, 12, "#66CCFF");
+            const mouse = tools.getMouse(cnv);
+            const easing = 0.05;
 
             (function frame() {
-                window.requestAnimationFrame(frame);
                 cxt.clearRect(0, 0, cnv.width, cnv.height);
 
                 //第1个小球跟随鼠标移动
-                var vx1 = (mouse.x - bigBall.x) * easing;
-                var vy1 = (mouse.y - bigBall.y) * easing;
-                bigBall.x += vx1;
-                bigBall.y += vy1;
+                bigBall.x += (mouse.x - bigBall.x) * easing;
+                bigBall.y += (mouse.y - bigBall.y) * easing;
+
+                if (bigBall.x < bigBall.radius)
+                    bigBall.x = bigBall.radius;
+                else if (bigBall.x > cnv.width - bigBall.radius)
+                    bigBall.x = cnv.width - bigBall.radius;
+
+                if (bigBall.y < bigBall.radius)
+                    bigBall.y = bigBall.radius;
+                else if (bigBall.y > cnv.height - bigBall.radius)
+                    bigBall.y = cnv.height - bigBall.radius;
+
                 bigBall.fill(cxt);
 
                 //第2个小球跟随第1个小球移动
-                var vx2 = (bigBall.x - smallBall.x) * easing;
-                var vy2 = (bigBall.y - smallBall.y) * easing;
-                smallBall.x += vx2;
-                smallBall.y += vy2;
+                smallBall.x += (bigBall.x - smallBall.x) * easing;
+                smallBall.y += (bigBall.y - smallBall.y) * easing;
                 smallBall.fill(cxt);
+                window.requestAnimationFrame(frame);
             })();
         }
     </script>
 </head>
+
 <body>
     <canvas id="canvas" width="200" height="150" style="border:1px solid silver;"></canvas>
 </body>
+
 </html>

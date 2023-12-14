@@ -14,7 +14,7 @@
             var cnv = $$("canvas");
             var cxt = cnv.getContext("2d");
 
-            const ball = new Ball(12, 12);
+            const ball = new Ball(12, cnv.height - 12);
             const gravity = 0.2;
             const vx = 4;
             var vy = -5;
@@ -22,14 +22,14 @@
             (function drawFrame() {
                 cxt.clearRect(0, 0, cnv.width, cnv.height);
 
-                if (ball.x < ball.radius || ball.x > cnv.width - ball.radius)
-                    vx = -vx;
                 ball.x += vx;
-                if (ball.y < ball.radius || ball.y > cnv.height - ball.radius)
-                    vy = -vy;
                 ball.y += vy;
-                ball.fill(cxt);
+                if (ball.x > cnv.width - ball.radius)
+                    ball.x = cnv.width - ball.radius;
+                if (ball.y > cnv.height - ball.radius)
+                    ball.y = cnv.height - ball.radius;
 
+                ball.fill(cxt);
                 vy += gravity;
                 window.requestAnimationFrame(drawFrame);
             })();

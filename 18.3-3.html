@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="utf-8" />
     <title></title>
@@ -13,40 +14,58 @@
             var cnv = $$("canvas");
             var cxt = cnv.getContext("2d");
 
-            //初始化数据
-            var ball = new Ball(cnv.width / 2, cnv.height / 2, 30);
-            ball.fill(cxt);
-            var easing = 0.02;
+            const ball = new Ball(cnv.width / 2, cnv.height / 2, 30);
+            const easing = 0.02;
+
+            const targetRed1 = 0;
+            const targetGreen1 = 255;
+            const targetBlue1 = 0;
+
+            const targetRed2 = 255;
+            const targetGreen2 = 0;
+            const targetBlue2 = 255;
 
             var red = 255;
             var green = 0;
             var blue = 0;
-            var targetRed = 10;
-            var targetGreen = 255;
-            var targetBlue = 55;
 
+            var targetRed = targetRed1;
+            var targetGreen = targetGreen1;
+            var targetBlue = targetBlue1;
 
+            //ball.fill(cxt);
             (function frame() {
-                window.requestAnimationFrame(frame);
                 cxt.clearRect(0, 0, cnv.width, cnv.height);
 
-                var vRed = (targetRed - red) * easing;
-                var vGreen = (targetGreen - green) * easing;
-                var vBlue = (targetBlue - blue) * easing;
-
-                red += vRed;
-                green += vGreen;
-                blue += vBlue;
-
-                var color = "rgba(" + parseInt(red) + "," + parseInt(green) + "," + parseInt(blue) + "," + "1.0)";
-                ball.color = color;
-
+                red += (targetRed - red) * easing;
+                green += (targetGreen - green) * easing;
+                blue += (targetBlue - blue) * easing;
+                ball.color = "rgba(" + parseInt(red) + "," + parseInt(green) + "," + parseInt(blue) + "," + "1.0)";
                 ball.fill(cxt);
+
+                if (Math.abs(red - targetRed1) <= 1)
+                    targetRed = targetRed2;
+                else if (Math.abs(red - targetRed2) <= 1)
+                    targetRed = targetRed1;
+
+                if (Math.abs(green - targetGreen1) <= 1)
+                    targetGreen = targetGreen2;
+                else if (Math.abs(green - targetGreen2) <= 1)
+                    targetGreen = targetGreen1;
+
+                if (Math.abs(blue - targetBlue1) <= 1)
+                    targetBlue = targetBlue2;
+                else if (Math.abs(blue - targetBlue2) <= 1)
+                    targetBlue = targetBlue1;
+
+                window.requestAnimationFrame(frame);
             })();
         }
     </script>
 </head>
+
 <body>
     <canvas id="canvas" width="200" height="150" style="border:1px solid silver;"></canvas>
 </body>
+
 </html>

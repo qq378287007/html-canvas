@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="utf-8" />
     <title></title>
@@ -13,19 +14,15 @@
             var cnv = $$("canvas");
             var cxt = cnv.getContext("2d");
 
-            //初始化数据
-            var ball = new Ball(cnv.width / 2, cnv.height / 2, 20);
+            const ball = new Ball(cnv.width / 2, cnv.height / 2, 20);
             ball.fill(cxt);
-            var mouse = tools.getMouse(cnv);
 
             var isMouseDown = false;
             var dx = 0, dy = 0;
-            //oldX和oldY用于存储小球旧的坐标
-            var oldX, oldY;
-            //初始速度vx和vy都为0
-            var vx = 0, vy = 0;
+            var oldX, oldY;//小球旧的坐标
+            var vx = 0, vy = 0;//初始速度
 
-            //添加mousedown事件
+            const mouse = tools.getMouse(cnv);
             cnv.addEventListener("mousedown", function () {
                 //判断鼠标点击是否落在小球上
                 if (ball.checkMouse(mouse)) {
@@ -53,7 +50,6 @@
             }
 
             (function drawFrame() {
-                window.requestAnimationFrame(drawFrame, cnv);
                 cxt.clearRect(0, 0, cnv.width, cnv.height);
 
                 if (isMouseDown) {
@@ -66,16 +62,24 @@
                     oldY = ball.y;
                 } else {
                     //如果isMouseDown为false，小球沿着抛掷方向运动
+                    if (ball.x > cnv.width - ball.radius || ball.x < ball.radius)
+                        vx = -vx;
+                    if (ball.y > cnv.height - ball.radius || ball.y < ball.radius)
+                        vy = -vy;
+
                     ball.x += vx;
                     ball.y += vy;
                 }
 
                 ball.fill(cxt);
+                window.requestAnimationFrame(drawFrame, cnv);
             })();
         }
     </script>
 </head>
+
 <body>
     <canvas id="canvas" width="300" height="200" style="border:1px solid silver;"></canvas>
 </body>
+
 </html>

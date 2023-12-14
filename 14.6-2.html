@@ -14,24 +14,24 @@
             var cnv = $$("canvas");
             var cxt = cnv.getContext("2d");
 
-            const ball = new Ball(cnv.width / 2, 0);
+            const ball = new Ball(cnv.width / 2, 12);
             const gravity = 0.2;//重力加速度
             const bounce = -0.8;//反弹系数
             var vy = 0; //y轴初始速度
 
             (function drawFrame() {
-                window.requestAnimationFrame(drawFrame);
                 cxt.clearRect(0, 0, cnv.width, cnv.height);
 
                 ball.y += vy;
                 //边界检测
                 if (ball.y > cnv.height - ball.radius) {
                     ball.y = cnv.height - ball.radius;
-                    vy = vy * bounce;//速度反向并且减小
+                    vy *= bounce;//速度反向并且减小
                 }
                 ball.fill(cxt);
 
                 vy += gravity;
+                window.requestAnimationFrame(drawFrame);
             })();
         }
     </script>

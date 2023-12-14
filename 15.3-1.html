@@ -14,12 +14,10 @@
             var cnv = $$("canvas");
             var cxt = cnv.getContext("2d");
 
-            //初始化数据
-            var ball = new Ball(0, cnv.height / 2);
+            const ball = new Ball(-12, cnv.height / 2);
             var vx = 2;
 
             (function frame() {
-                window.requestAnimationFrame(frame);
                 cxt.clearRect(0, 0, cnv.width, cnv.height);
 
                 ball.x += vx;
@@ -27,6 +25,7 @@
                     ball.x = -ball.radius;
 
                 ball.fill(cxt);
+                window.requestAnimationFrame(frame);
             })();
         }
     </script>

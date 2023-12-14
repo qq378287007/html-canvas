@@ -14,12 +14,12 @@
             var cnv = $$("canvas");
             var cxt = cnv.getContext("2d");
 
-            var balls = [];//定义一个用来存放小球的数组balls
-            var n = 50;//n表示小球数量
+            const balls = [];//定义一个用来存放小球的数组balls
+            const n = 50;//n表示小球数量
 
-            for (var i = 0; i < n; i++) { //生成n个小球，其中小球的color、vx、vy都是随机值
+            for (let i = 0; i < n; i++) { //生成n个小球，其中小球的color、vx、vy都是随机值
                 //球心坐标为Canvas中心，color为随机颜色值
-                var ball = new Ball(cnv.width / 2, cnv.height / 2, 5, tools.getRandomColor());
+                const ball = new Ball(cnv.width / 2, cnv.height / 2, 5, tools.getRandomColor());
                 //ball.vx和ball.vy取值都是：-1~1之间的任意数
                 ball.vx = Math.random() * 2 - 1;
                 ball.vy = Math.random() * 2 - 1;
@@ -27,7 +27,6 @@
             }
 
             (function frame() {
-                window.requestAnimationFrame(frame);
                 cxt.clearRect(0, 0, cnv.width, cnv.height);
 
                 balls.forEach(function (ball) {//使用forEach()函数遍历数组balls
@@ -45,7 +44,8 @@
 
                     ball.x += ball.vx;
                     ball.y += ball.vy;
-                })
+                });
+                window.requestAnimationFrame(frame);
             })();
         }
     </script>

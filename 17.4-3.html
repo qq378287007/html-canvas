@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="utf-8" />
     <title></title>
@@ -13,20 +14,17 @@
             var cnv = $$("canvas");
             var cxt = cnv.getContext("2d");
 
-            var ball = new Ball(cnv.width / 2, cnv.height, 20);
+            const ball = new Ball(cnv.width / 2, cnv.height, 20);
+            const gravity = 1.5;//重力
+            const bounce = -0.8;//反弹消耗
             ball.fill(cxt);
-            var mouse = tools.getMouse(cnv);
 
             var isMouseDown = false;
             var dx = 0, dy = 0;
-            //oldX和oldY用于存储小球旧的坐标
-            var oldX, oldY;
-            //初始速度vx和vy都为0
-            var vx = 0, vy = 0;
-            //加入重力和反弹消耗
-            var gravity = 1.5;
-            var bounce = -0.8;
+            var oldX, oldY;//小球旧的坐标
+            var vx = 0, vy = 0; //初始速度
 
+            const mouse = tools.getMouse(cnv);
             cnv.addEventListener("mousedown", function () {
                 //判断鼠标点击是否落在小球上
                 if (ball.checkMouse(mouse)) {
@@ -47,20 +45,15 @@
                 ball.y = mouse.y - dy;
 
                 //加入边界限制
-                //当小球碰到左边界时
-                if (ball.x < ball.radius) {
+                if (ball.x < ball.radius) //当小球碰到左边界时
                     ball.x = ball.radius;
-                    //当小球碰到右边界时
-                } else if (ball.x > cnv.width - ball.radius) {
+                else if (ball.x > cnv.width - ball.radius)  //当小球碰到右边界时
                     ball.x = cnv.width - ball.radius;
-                }
-                //当小球碰到上边界时
-                if (ball.y < ball.radius) {
+
+                if (ball.y < ball.radius)  //当小球碰到上边界时
                     ball.y = ball.radius;
-                    //当小球碰到下边界时
-                } else if (ball.y > cnv.height - ball.radius) {
+                else if (ball.y > cnv.height - ball.radius) //当小球碰到下边界时
                     ball.y = cnv.height - ball.radius;
-                }
             }
             function onMouseUp() {
                 //鼠标松开时，isMouseDown设置为false
@@ -70,7 +63,6 @@
             }
 
             (function drawFrame() {
-                window.requestAnimationFrame(drawFrame, cnv);
                 cxt.clearRect(0, 0, cnv.width, cnv.height);
 
                 if (isMouseDown) {
@@ -86,33 +78,34 @@
                     vy += gravity;
                     ball.x += vx;
                     ball.y += vy;
+
                     //边界检测
-                    //碰到右边界
-                    if (ball.x > canvas.width - ball.radius) {
+                    if (ball.x > canvas.width - ball.radius) {//碰到右边界
                         ball.x = canvas.width - ball.radius;
-                        vx = vx * bounce;
-                        //碰到左边界
-                    } else if (ball.x < ball.radius) {
+                        vx *= bounce;
+                    } else if (ball.x < ball.radius) {//碰到左边界
                         ball.x = ball.radius;
-                        vx = vx * bounce;
+                        vx *= bounce;
                     }
-                    //碰到下边界
-                    if (ball.y > canvas.height - ball.radius) {
+
+                    if (ball.y > canvas.height - ball.radius) { //碰到下边界
                         ball.y = canvas.height - ball.radius;
-                        vy = vy * bounce;
-                        //碰到下边界
-                    } else if (ball.y < ball.radius) {
+                        vy *= bounce;
+                    } else if (ball.y < ball.radius) {//碰到上边界
                         ball.y = ball.radius;
-                        vy = vy * bounce;
+                        vy *= bounce;
                     }
                 }
 
                 ball.fill(cxt);
+                window.requestAnimationFrame(drawFrame, cnv);
             })();
         }
     </script>
 </head>
+
 <body>
     <canvas id="canvas" width="300" height="200" style="border:1px solid silver;"></canvas>
 </body>
+
 </html>

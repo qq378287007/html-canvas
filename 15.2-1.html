@@ -14,38 +14,30 @@
             var cnv = $$("canvas");
             var cxt = cnv.getContext("2d");
 
-            //初始化数据
-            var ball = new Ball(cnv.width / 2, cnv.height / 2);
+            const ball = new Ball(cnv.width / 2, cnv.height / 2);
             ball.fill(cxt);
 
-            var key = tools.getKey();
+            const key = tools.getKey();
             window.addEventListener("keydown", function (e) { //添加键盘事件
                 cxt.clearRect(0, 0, cnv.width, cnv.height);
                 switch (key.direction) {//根据key.direction的值，判断物体移动方向
                     case "up":
                         ball.y -= 3;
-                        checkBorder();
-                        ball.fill(cxt);
                         break;
                     case "down":
                         ball.y += 3;
-                        checkBorder();
-                        ball.fill(cxt);
                         break;
                     case "left":
                         ball.x -= 3;
-                        checkBorder();
-                        ball.fill(cxt);
                         break;
                     case "right":
                         ball.x += 3;
-                        checkBorder();
-                        ball.fill(cxt);
                         break;
                     default:
-                        checkBorder();
-                        ball.fill(cxt);
-                }
+                        break;
+                };
+                checkBorder();
+                ball.fill(cxt);
             }, false);
 
             function checkBorder() {//定义边界检测函数

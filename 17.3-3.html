@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="utf-8" />
     <title></title>
@@ -13,12 +14,12 @@
             var cnv = $$("canvas");
             var cxt = cnv.getContext("2d");
 
-            //初始化数据
-            var ball = new Ball(cnv.width / 2, cnv.height / 2, 20);
+            const ball = new Ball(cnv.width / 2, cnv.height / 2, 20);
             ball.fill(cxt);
-            var mouse = tools.getMouse(cnv);
+
             var dx = 0, dy = 0;
 
+            const mouse = tools.getMouse(cnv);
             cnv.addEventListener("mousedown", function () {
                 if (ball.checkMouse(mouse)) {
                     //dx为鼠标与球心的水平偏移量
@@ -35,20 +36,15 @@
                 ball.y = mouse.y - dy;
 
                 //加入边界限制
-                //当小球碰到左边界时
-                if (ball.x < ball.radius) {
+                if (ball.x < ball.radius)  //当小球碰到左边界时
                     ball.x = ball.radius;
-                    //当小球碰到右边界时
-                } else if (ball.x > cnv.width - ball.radius) {
+                else if (ball.x > cnv.width - ball.radius)  //当小球碰到右边界时
                     ball.x = cnv.width - ball.radius;
-                }
-                //当小球碰到上边界时
-                if (ball.y < ball.radius) {
+
+                if (ball.y < ball.radius) //当小球碰到上边界时
                     ball.y = ball.radius;
-                    //当小球碰到下边界时
-                } else if (ball.y > cnv.height - ball.radius) {
+                else if (ball.y > cnv.height - ball.radius)  //当小球碰到下边界时
                     ball.y = cnv.height - ball.radius;
-                }
             }
             function onMouseUp() {
                 document.removeEventListener("mouseup", onMouseUp, false);
@@ -56,15 +52,16 @@
             }
 
             (function drawFrame() {
-                window.requestAnimationFrame(drawFrame, cnv);
                 cxt.clearRect(0, 0, cnv.width, cnv.height);
-
                 ball.fill(cxt);
+                window.requestAnimationFrame(drawFrame, cnv);
             })();
         }
     </script>
 </head>
+
 <body>
     <canvas id="canvas" width="200" height="150" style="border:1px solid silver;"></canvas>
 </body>
+
 </html>

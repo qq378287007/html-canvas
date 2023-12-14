@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="utf-8" />
     <title></title>
@@ -14,14 +15,14 @@
             var cxt = cnv.getContext("2d");
 
             //定义一个用来存放方块的数组boxes
-            var boxes = [];
+            const boxes = [];
+            //定义方块的Y轴速度
+            const vy = 1.5;
+
             //定义一个“当前活动”的方块
             var activeBox = createBox();
-            //定义方块的Y轴速度
-            var vy = 1.5;
 
-            //加入鼠标控制
-            var key = tools.getKey();
+            const key = tools.getKey();
             window.addEventListener("keydown", function () {
                 switch (key.direction) {
                     case "down":
@@ -38,19 +39,12 @@
 
             //定义一个函数createBox()，用于创建一个新的方块
             function createBox() {
-                var x = Math.random() * cnv.width;
-                var y = 0;
-                var width = Math.random() * 40 + 10;
-                var height = Math.random() * 40 + 10;
-                var color = tools.getRandomColor();
-                var box = new Box(x, y, width, height, color);
-                //添加到数组boxes中
+                const box = new Box(Math.random() * cnv.width, 0, Math.random() * 40 + 10, Math.random() * 40 + 10, tools.getRandomColor());
                 boxes.push(box);
                 return box;
             }
 
             (function frame() {
-                window.requestAnimationFrame(frame);
                 cxt.clearRect(0, 0, cnv.width, cnv.height);
 
                 activeBox.y += vy;
@@ -70,12 +64,14 @@
                     }
                     box.fill(cxt);
                 });
+                window.requestAnimationFrame(frame);
             })();
-
         }
     </script>
 </head>
+
 <body>
     <canvas id="canvas" width="270" height="200" style="border:1px solid silver;"></canvas>
 </body>
+
 </html>

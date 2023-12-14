@@ -14,7 +14,7 @@
             var cnv = $$("canvas");
             var cxt = cnv.getContext("2d");
 
-            const ball = new Ball();
+            const ball = new Ball(12, 12);
             const friction = 0.95;
             const speed = 8;
             var vx = speed * Math.cos(30 * Math.PI / 180);

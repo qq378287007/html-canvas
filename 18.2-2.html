@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="utf-8" />
     <title></title>
@@ -13,29 +14,26 @@
             var cnv = $$("canvas");
             var cxt = cnv.getContext("2d");
 
-            var ball = new Ball(0, 0);
-            //定义终点的X轴坐标和Y轴坐标
-            var targetX = cnv.width * (3 / 4);
-            var targetY = cnv.height * (1 / 2);
-            //定义缓动系数
-            var easing = 0.05;
+            const ball = new Ball(12, 12);
+            const targetX = cnv.width - ball.radius; //终点的x轴坐标
+            const targetY = cnv.height - ball.radius; //终点的y轴坐标
+            const easing = 0.05; //缓动系数
 
             (function frame() {
-                window.requestAnimationFrame(frame);
                 cxt.clearRect(0, 0, cnv.width, cnv.height);
 
-                var vx = (targetX - ball.x) * easing;
-                var vy = (targetY - ball.y) * easing;
-                ball.x += vx;
-                ball.y += vy;
+                ball.x += (targetX - ball.x) * easing;
+                ball.y += (targetY - ball.y) * easing;
 
                 ball.fill(cxt);
+                window.requestAnimationFrame(frame);
             })();
-
         }
     </script>
 </head>
+
 <body>
     <canvas id="canvas" width="200" height="150" style="border:1px solid silver;"></canvas>
 </body>
+
 </html>

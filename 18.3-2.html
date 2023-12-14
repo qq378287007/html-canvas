@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="utf-8" />
     <title></title>
@@ -13,26 +14,33 @@
             var cnv = $$("canvas");
             var cxt = cnv.getContext("2d");
 
-            //初始化数据
-            var ball = new Ball(cnv.width / 2, cnv.height / 2, 30, "rgba(255,102,153,1.0)");
-            var opacity = 1.0;
-            var targetOpacity = 0.0;
-            var easing = 0.05;
+            const ball = new Ball(cnv.width / 2, cnv.height / 2, 30, "rgba(255,102,153,0.5)");
+            const easing = 0.05;
+            const targetOpacity1 = 1.0;
+            const targetOpacity2 = 0.0;
+            var targetOpacity = targetOpacity1;
+            var opacity = 0.5;
 
             (function frame() {
-                window.requestAnimationFrame(frame);
                 cxt.clearRect(0, 0, cnv.width, cnv.height);
 
-                var v = (targetOpacity - opacity) * easing;
-                opacity += v;
+                opacity += (targetOpacity - opacity) * easing;
                 ball.color = "rgba(255,102,153," + opacity + ")";
-
                 ball.fill(cxt);
+
+                if (Math.abs(opacity - targetOpacity1) <= 0.01)
+                    targetOpacity = targetOpacity2;
+                else if (Math.abs(opacity - targetOpacity2) <= 0.01)
+                    targetOpacity = targetOpacity1;
+
+                window.requestAnimationFrame(frame);
             })();
         }
     </script>
 </head>
+
 <body>
     <canvas id="canvas" width="200" height="150" style="border:1px solid silver;"></canvas>
 </body>
+
 </html>

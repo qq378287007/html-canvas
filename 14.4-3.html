@@ -23,15 +23,19 @@
                 cxt.clearRect(0, 0, cnv.width, cnv.height);
                 var dx = mouse.x - arrow.x;
                 var dy = mouse.y - arrow.y;
-                if (!(dx == 0 && dy == 0)) {
+                if (dx != 0 || dy != 0) {
                     angle = Math.atan2(dy, dx);
+                    arrow.angle = angle;
 
                     var vx = Math.cos(angle) * speed;
                     arrow.x += vx;
                     var vy = Math.sin(angle) * speed;
                     arrow.y += vy;
 
-                    arrow.angle = angle;
+                    if (dx * (mouse.x - arrow.x) <= 0.01) //水平移动距离超过箭头中心与鼠标的水平距离
+                        arrow.x = mouse.x;
+                    if (dy * (mouse.y - arrow.y) <= 0.01)
+                        arrow.y = mouse.y;
                 }
                 arrow.fill(cxt);
                 window.requestAnimationFrame(drawFrame, cnv);

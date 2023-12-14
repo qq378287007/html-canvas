@@ -14,9 +14,9 @@
             var cnv = $$("canvas");
             var cxt = cnv.getContext("2d");
 
-            const ball = new Ball(0, cnv.height / 2);
+            const ball = new Ball(12, cnv.height / 2);
             const friction = 0.95;//摩擦系数
-            var vx = 8;//v轴方向速度
+            var vx = 8;//x轴方向速度
 
             (function frame() {
                 cxt.clearRect(0, 0, cnv.width, cnv.height);

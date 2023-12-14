@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="utf-8" />
     <title></title>
@@ -13,24 +14,19 @@
             var cnv = $$("canvas");
             var cxt = cnv.getContext("2d");
 
-            var ball = new Ball(cnv.width / 2, cnv.height / 2);
-            var mouse = tools.getMouse(cnv);
+            const ball = new Ball(cnv.width / 2, cnv.height / 2);
+            const mouse = tools.getMouse(cnv);
+            const spring = 0.02;
+            const f = 0.95;
 
-            var targetX = cnv.width / 2;
-            var spring = 0.02;
             var vx = 0;
             var vy = 0;
-            var f = 0.95;
 
             (function frame() {
-                window.requestAnimationFrame(frame);
                 cxt.clearRect(0, 0, cnv.width, cnv.height);
 
-                var ax = (mouse.x - ball.x) * spring;
-                var ay = (mouse.y - ball.y) * spring;
-
-                vx += ax;
-                vy += ay;
+                vx += (mouse.x - ball.x) * spring;
+                vy += (mouse.y - ball.y) * spring;
 
                 vx *= f;
                 vy *= f;
@@ -38,12 +34,25 @@
                 ball.x += vx;
                 ball.y += vy;
 
+                if (ball.x < ball.radius)
+                    ball.x = ball.radius;
+                else if (ball.x > cnv.width - ball.radius)
+                    ball.x = cnv.width - ball.radius;
+
+                if (ball.y < ball.radius)
+                    ball.y = ball.radius;
+                else if (ball.y > cnv.height - ball.radius)
+                    ball.y = cnv.height - ball.radius;
+
                 ball.fill(cxt);
+                window.requestAnimationFrame(frame);
             })();
         }
     </script>
 </head>
+
 <body>
     <canvas id="canvas" width="200" height="150" style="border:1px solid silver;"></canvas>
 </body>
+
 </html>
